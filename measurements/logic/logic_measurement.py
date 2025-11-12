@@ -1,7 +1,7 @@
 from ..models import Measurement
 
 def get_measurements():
-    queryset = Measurement.objects.all().order_by('-dateTime')[:10]
+    queryset = Measurement.objects.all()
     return (queryset)
 
 def create_measurement(form):
