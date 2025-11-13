@@ -5,12 +5,13 @@ from django.urls import reverse
 from .forms import VariableForm
 from .logic.variable_logic import get_variables, get_variable, create_variable
 from django.contrib.auth.decorators import login_required
+# Descomentar cuando se cree el archivo monitoring/auth0backend.py
 from monitoring.auth0backend import getRole
 
 @login_required
 def variable_list(request):
     role = getRole(request)
-    if role == "Gerencia Campus":
+    if role == "Coordinador Bodega":
         variables = get_variables()
         context = {
             'variable_list': variables
@@ -30,7 +31,7 @@ def single_variable(request, id=0):
 @login_required
 def variable_create(request):
     role = getRole(request)
-    if role == "Gerencia Campus":
+    if role == "Coordinador Bodega":
         if request.method == 'POST':
             form = VariableForm(request.POST)
             if form.is_valid():
